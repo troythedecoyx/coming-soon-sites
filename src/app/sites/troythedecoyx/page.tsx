@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import StreamComingSoon from "@/components/StreamComingSoon";
+import WorldExperience from "@/components/room/WorldExperience";
 import { getSite } from "@/lib/sites";
 
 const site = getSite("troythedecoyx");
@@ -20,7 +20,7 @@ const streamTags = ["Valorant", "Fortnite", "New Games", "Reaction Content", "Co
 
 export default function Page() {
   return (
-    <StreamComingSoon
+    <WorldExperience
       site={site}
       logoSrc="/logos/troythedecoyx.png"
       roles={roles}
