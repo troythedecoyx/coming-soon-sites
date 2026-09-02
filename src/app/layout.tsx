@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Audiowide } from "next/font/google";
+import { Geist, Geist_Mono, Barlow_Condensed } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,14 +12,14 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Futuristic display face used only by troythedecoyx's hero wordmark and
-// countdown digits — ported from the prior troythedecoyx-website design.
-// Loaded globally per next/font convention, applied selectively via
-// --font-display.
-const audiowide = Audiowide({
+// Bold condensed headline face for troythedecoyx's photo-brand hero
+// (MKBHD / Carlsberg reference: huge, tight-tracking, all-caps-leaning
+// condensed sans over a full-bleed hero). Loaded globally per next/font
+// convention, applied selectively via --font-display.
+const barlowCondensed = Barlow_Condensed({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: "400",
+  weight: ["600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -31,7 +31,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${audiowide.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${barlowCondensed.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

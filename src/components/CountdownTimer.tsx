@@ -8,8 +8,10 @@ interface CountdownTimerProps {
   accent: string;
   /** "soft" (default): rounded glass card with a bordered box per digit.
    *  "glow": borderless, large gradient-clipped digits with a drop-shadow
-   *  glow — used by the troythedecoyx hero. */
-  variant?: "soft" | "glow";
+   *  glow. "solid": plain bold white numerals directly on a photo/color
+   *  hero, no card/glow — matches a photo-brand hero (MKBHD/Carlsberg
+   *  style) where the countdown reads like part of the headline. */
+  variant?: "soft" | "glow" | "solid";
   /** Required when variant is "glow": CSS gradient for the digit text-clip. */
   gradient?: string;
 }
@@ -57,6 +59,30 @@ export default function CountdownTimer({ targetDate, accent, variant = "soft", g
   }, [targetDate]);
 
   const display = timeLeft ?? { days: 0, hours: 0, minutes: 0, seconds: 0 };
+
+  if (variant === "solid") {
+    return (
+      <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4" aria-live="polite">
+        {units.map((unit, i) => (
+          <motion.div
+            key={unit.key}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 * i, duration: 0.4, ease: "easeOut" }}
+            className="flex items-baseline gap-1"
+          >
+            <span
+              className="font-[family-name:var(--font-display)] text-3xl font-bold leading-none tabular-nums text-white sm:text-4xl"
+            >
+              {String(display[unit.key]).padStart(2, "0")}
+            </span>
+            <span className="text-xs font-medium uppercase tracking-wide text-white/70">{unit.label.slice(0, 1)}</span>
+            {i < units.length - 1 && <span className="ml-2 text-white/30">/</span>}
+          </motion.div>
+        ))}
+      </div>
+    );
+  }
 
   if (variant === "glow") {
     return (
