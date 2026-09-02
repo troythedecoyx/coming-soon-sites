@@ -6,6 +6,12 @@ import { motion } from "framer-motion";
 interface CountdownTimerProps {
   targetDate: string;
   accent: string;
+  /** "soft" (default): rounded glass card with a bordered box per digit.
+   *  "glow": borderless, large gradient-clipped digits with a drop-shadow
+   *  glow — used by the troythedecoyx hero. */
+  variant?: "soft" | "glow";
+  /** Required when variant is "glow": CSS gradient for the digit text-clip. */
+  gradient?: string;
 }
 
 interface TimeLeft {
@@ -32,7 +38,7 @@ const units: { key: keyof TimeLeft; label: string }[] = [
   { key: "seconds", label: "Seconds" },
 ];
 
-export default function CountdownTimer({ targetDate, accent }: CountdownTimerProps) {
+export default function CountdownTimer({ targetDate, accent, variant = "soft", gradient }: CountdownTimerProps) {
   // Start null so server and client render the same markup on hydration;
   // fill in real numbers only after mount.
   const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null);
@@ -51,6 +57,48 @@ export default function CountdownTimer({ targetDate, accent }: CountdownTimerPro
   }, [targetDate]);
 
   const display = timeLeft ?? { days: 0, hours: 0, minutes: 0, seconds: 0 };
+
+  if (variant === "glow") {
+    return (
+      <div className="flex flex-wrap items-center justify-center gap-2 sm:justify-start sm:gap-3" aria-live="polite">
+        {units.map((unit, i) => (
+          <motion.div
+            key={unit.key}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15 * i, duration: 0.5, ease: "easeOut" }}
+            className="flex items-center"
+          >
+            <div className="flex flex-col items-center">
+              <span
+                className="font-[family-name:var(--font-display)] text-3xl leading-none tabular-nums sm:text-5xl"
+                style={{
+                  backgroundImage: gradient,
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                  filter: `drop-shadow(0 0 20px ${accent}55)`,
+                }}
+              >
+                {String(display[unit.key]).padStart(2, "0")}
+              </span>
+              <span className="mt-1 text-[10px] uppercase tracking-widest sm:text-xs" style={{ color: "var(--site-text-muted)" }}>
+                {unit.label}
+              </span>
+            </div>
+            {i < units.length - 1 && (
+              <span
+                className="mb-4 ml-2 font-[family-name:var(--font-display)] text-2xl sm:ml-3 sm:text-4xl"
+                style={{ color: accent, opacity: 0.5 }}
+              >
+                :
+              </span>
+            )}
+          </motion.div>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div className="flex items-center justify-center gap-3 sm:gap-5" aria-live="polite">

@@ -10,6 +10,9 @@ export interface SiteConfig {
   id: SiteId;
   domain: string;
   name: string;
+  /** Stylized wordmark form for logo-like display (e.g. "TroyTheDecoyX" —
+   *  never underscored, uppercased, or lowercased). Falls back to `name`. */
+  displayName?: string;
   tagline: string;
   description: string;
   /** ISO date string the countdown targets. Update anytime. */
@@ -53,8 +56,10 @@ export const sites: Record<SiteId, SiteConfig> = {
     id: "troythedecoyx",
     domain: "troythedecoyx.com",
     name: "Troy the Decoy X",
+    // Always styled this exact way — never underscored, never all-caps/lowercase.
+    displayName: "TroyTheDecoyX",
     tagline: "Gaming. Internet. Code.",
-    description: "New stream, new content, new stuff. Coming soon.",
+    description: "I'm streaming again. New site, new content, going live soon.",
     launchDate: "2026-12-01T00:00:00Z",
     theme: {
       // Troy the Decoy X brand kit: ND1 (near-dark), Primary/Secondary purples,
