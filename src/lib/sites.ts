@@ -60,7 +60,10 @@ export const sites: Record<SiteId, SiteConfig> = {
     displayName: "TroyTheDecoyX",
     tagline: "Gaming. Internet. Code.",
     description: "I'm streaming again. New site, new content, going live soon.",
-    launchDate: "2026-12-01T00:00:00Z",
+    // Sept 8, 2026, 7:00 PM Nashville time. CDT (UTC-5) is in effect on
+    // that date, not standard CST (UTC-6) — written as an explicit offset
+    // rather than pre-converted to Z so the intended local time stays clear.
+    launchDate: "2026-09-08T19:00:00-05:00",
     theme: {
       // Troy the Decoy X brand kit: ND1 (near-dark), Primary/Secondary purples,
       // Accent lavender, NL1 (near-light) — see brand-assets/troythedecoyx/colors/
