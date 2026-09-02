@@ -9,8 +9,6 @@ export const metadata: Metadata = {
   description: site.description,
 };
 
-// Swap in the real logo once it's uploaded to public/logos/troythedecoyx.png
-// by changing logoSrc back to "/logos/troythedecoyx.png".
 export default function Page() {
-  return <ComingSoon site={site} />;
+  return <ComingSoon site={site} logoSrc="/logos/troythedecoyx.png" />;
 }

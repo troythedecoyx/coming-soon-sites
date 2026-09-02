@@ -31,7 +31,15 @@ export default function ComingSoon({ site, logoSrc }: { site: SiteConfig; logoSr
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="mb-8"
           >
-            <Image src={logoSrc} alt={site.name} width={96} height={96} className="rounded-2xl" preload />
+            <Image
+              src={logoSrc}
+              alt={site.name}
+              width={112}
+              height={112}
+              className="rounded-full"
+              style={{ boxShadow: `0 0 0 2px ${theme.accent}55, 0 0 32px ${theme.accentSoft}` }}
+              preload
+            />
           </motion.div>
         ) : (
           <motion.div

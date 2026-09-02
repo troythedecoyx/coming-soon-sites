@@ -57,13 +57,15 @@ export const sites: Record<SiteId, SiteConfig> = {
     description: "New stream, new content, new stuff. Coming soon.",
     launchDate: "2026-12-01T00:00:00Z",
     theme: {
-      bg: "#0d0510",
-      bgGradientFrom: "#0d0510",
-      bgGradientTo: "#1a0a24",
-      accent: "#a855f7",
-      accentSoft: "#a855f733",
-      text: "#f5f5f7",
-      textMuted: "#c4b5fd88",
+      // Troy the Decoy X brand kit: ND1 (near-dark), Primary/Secondary purples,
+      // Accent lavender, NL1 (near-light) — see brand-assets/troythedecoyx/colors/
+      bg: "#171621",
+      bgGradientFrom: "#171621",
+      bgGradientTo: "#2a2645",
+      accent: "#c7b9ff",
+      accentSoft: "#c7b9ff33",
+      text: "#f4f2ff",
+      textMuted: "#b7b0e8",
       font: "var(--font-sans)",
     },
     socials: [
